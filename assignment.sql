@@ -93,8 +93,10 @@ JOIN Sales ON Customers.CustomerID = Sales.CustomerID
 GROUP BY CustomerID;
 
 -- Customers with Total Sales Amount Greater Than $1500
-SELECT Customers.CustomerID, Customers.FirstName, Customers.LastName, SUM((Sales.Quantity * Products.Price) > 1500) as Total_SalesCustomers
+
+SELECT Customers.CustomerID, Customers.FirstName, Customers.LastName, SUM((Sales.Quantity * Products.Price)) as Total_SalesCustomers
 FROM Sales
 JOIN Customers ON Sales.CustomerID = Customers.CustomerID
 JOIN Products ON Sales.ProductID = Products.ProductID
-GROUP BY  Customers.CustomerID, Customers.FirstName, Customers.LastName; 
+GROUP BY  Customers.CustomerID, Customers.FirstName, Customers.LastName
+HAVING SUM(Sales.Quantity * Products.Price) > 1500;
