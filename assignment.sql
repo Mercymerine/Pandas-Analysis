@@ -66,10 +66,12 @@ SELECT MIN(quantity) as MIN_QUANTITY
 FROM Sales;
 
 -- Calculate the total sales made
+SELECT SUM(Total_sales) AS Total_sum
+FROM(
 SELECT Products.ProductID, Products.Price, SUM((Quantity * Price)) as Total_sales
 FROM Products
 JOIN Sales ON Products.ProductID = Sales.ProductID
-GROUP BY ProductID;
+GROUP BY ProductID) AS Subquery;
 
 -- Calculate the Total Sales Amount by Customer
 SELECT Customers.CustomerID, Customers.FirstName, Customers.LastName, SUM(Sales.Quantity * Products.Price) as Total_SalesCustomers
